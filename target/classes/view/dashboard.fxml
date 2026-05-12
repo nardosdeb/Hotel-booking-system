@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane styleClass="dashboard-background" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
+    <!-- Stylesheet will be loaded programmatically in Main.java or LoginController.java -->
+    <!-- Header -->
+    <top>
+        <VBox>
+            <!-- Navigation Bar -->
+            <HBox alignment="CENTER_LEFT" prefHeight="76.0" prefWidth="683.0" spacing="15" styleClass="header">
+                <padding>
+                    <Insets bottom="15" left="30" right="30" top="15" />
+                </padding>
+
+                <ImageView fx:id="logoImageView" fitHeight="40" fitWidth="40" preserveRatio="true" />
+                <VBox spacing="2">
+   
+                   <HBox alignment="CENTER" prefHeight="30.0" prefWidth="170.0" spacing="5">
+                       <Label style="-fx-font-size: 20px;" text="⭐" />
+                       <Label contentDisplay="CENTER" prefHeight="30.0" prefWidth="18.0" style="-fx-font-size: 20px;" text="⭐" />
+                       <Label style="-fx-font-size: 20px;" text="⭐" />
+                       <Label style="-fx-font-size: 20px;" text="⭐" />
+                       <Label style="-fx-font-size: 20px;" text="⭐" />
+                   </HBox>
+                    <Label styleClass="header-title" text="Hilton Hotel" />
+                    <Label fx:id="welcomeLabel" styleClass="header-subtitle" text="Welcome" />
+                </VBox>
+
+                <Region HBox.hgrow="ALWAYS" />
+
+                <Label fx:id="balanceLabel" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: -primary-color;" />
+
+                <Button fx:id="logoutButton" onAction="#handleLogout" styleClass="btn-logout" text="Logout" />
+            </HBox>
+
+            <!-- Hero Section -->
+            <VBox alignment="CENTER" prefHeight="43.0" prefWidth="441.0" spacing="15" styleClass="hero-section">
+                <padding>
+                    <Insets bottom="50" left="30" right="30" top="50" />
+                </padding>
+                <Label styleClass="hero-title" text="Discover Your Perfect Stay" />
+                <Label styleClass="hero-subtitle" text="Experience world-class hospitality in our luxury rooms and suites" />
+            </VBox>
+        </VBox>
+    </top>
+
+    <!-- Main Content -->
+    <center>
+        <TabPane>
+            <Tab closable="false" text="Available Rooms">
+                <HBox spacing="20" style="-fx-padding: 20;">
+                    <!-- Left Side: Rooms Container -->
+                    <ScrollPane fitToWidth="true" styleClass="content-scroll" HBox.hgrow="ALWAYS">
+                        <VBox spacing="20">
+                            <VBox spacing="10">
+                                <Label styleClass="section-title" text="Available Rooms" />
+                                <Label styleClass="section-subtitle" text="Browse our exquisite selection of rooms and suites" />
+                            </VBox>
+
+                            <FlowPane fx:id="roomsContainer" alignment="TOP_LEFT" hgap="25" vgap="25" />
+                        </VBox>
+                    </ScrollPane>
+                </HBox>
+            </Tab>
+            <Tab closable="false" text="My Bookings">
+                <VBox prefHeight="605.0" prefWidth="683.0" spacing="20" style="-fx-padding: 20;">
+                    <Label styleClass="section-title" text="My Booking History" />
+                    <TableView fx:id="myBookingsTable" prefHeight="400">
+                        <columns>
+                            <TableColumn fx:id="bookingIdCol" text="Booking ID" />
+                            <TableColumn fx:id="bookedRoomCol" text="Room" />
+                            <TableColumn fx:id="checkInCol" text="Check-in" />
+                            <TableColumn fx:id="checkOutCol" text="Check-out" />
+                            <TableColumn fx:id="totalPriceCol" text="Total Price" />
+                            <TableColumn fx:id="bookingStatusCol" text="Status" />
+                            <TableColumn fx:id="paymentMethodCol" text="Payment Method" />
+                            <TableColumn fx:id="paymentDetailsCol" text="Payment Details" />
+                        </columns>
+                    </TableView>
+                    <HBox spacing="10">
+                        <Button onAction="#handleModifyBooking" styleClass="btn-primary" text="Modify Check-out" />
+                        <Button onAction="#handleCancelBooking" styleClass="btn-danger" text="❌" />
+                    </HBox>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>

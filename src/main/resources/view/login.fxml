@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<SplitPane dividerPositions="0.5" prefHeight="700" prefWidth="1000" styleClass="login-background" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+
+    <items>
+        <ScrollPane fitToWidth="true" styleClass="content-scroll">
+            <VBox spacing="20" style="-fx-padding: 20;">
+                <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: -primary-color;" styleClass="section-title" text="Hilton Hotel Information &amp; Policies" />
+                <Label style="-fx-font-weight: bold; -fx-text-fill: -primary-color;" styleClass="subtitle" text="Welcome to Hilton Hotel, where luxury meets comfort. We are dedicated to providing you with an exceptional stay." wrapText="true" />
+
+                <FlowPane fx:id="imageContainer" alignment="CENTER" hgap="20" prefWrapLength="400" vgap="20">
+                    <!-- Images and descriptions will be added here programmatically -->
+                </FlowPane>
+
+                <GridPane hgap="20" vgap="10">
+                    <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <Hyperlink onAction="#showAmenitiesDialog" styleClass="info-link" text="Amenities" />
+                    </VBox>
+                    <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <Hyperlink onAction="#showBookingPoliciesDialog" styleClass="info-link" text="Booking Policies" />
+                    </VBox>
+               <columnConstraints>
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+               </rowConstraints>
+                </GridPane>
+
+                <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: -primary-color;" styleClass="section-title" text="Facilities of Hilton Hotel" />
+                <Label styleClass="subtitle" text="Great facilities! Review score, 8.3" />
+                <GridPane hgap="20" vgap="10">
+                    <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <Hyperlink onAction="#showPopularFacilitiesDialog" styleClass="info-link" text="Most popular facilities" />
+                    </VBox>
+                    <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <Hyperlink onAction="#showBathroomFacilitiesDialog" styleClass="info-link" text="Bathroom" />
+                    </VBox>
+                    <VBox spacing="5" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                        <Hyperlink onAction="#showBedroomFacilitiesDialog" styleClass="info-link" text="Bedroom" />
+                    </VBox>
+                    <VBox spacing="5" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="1">
+                        <Hyperlink onAction="#showAdditionalServicesDialog" styleClass="info-link" text="Additional Services" />
+                    </VBox>
+               <columnConstraints>
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
+                </GridPane>
+            </VBox>
+        </ScrollPane>
+
+        <VBox alignment="CENTER" spacing="40" style="-fx-padding: 40;">
+            <VBox alignment="CENTER" spacing="10">
+                <ImageView fitHeight="150" fitWidth="150" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/logo.png" />
+                    </image>
+                </ImageView>
+                <Label prefHeight="32.0" prefWidth="169.0" style="-fx-font-weight: bold; -fx-text-fill: -primary-color;" styleClass="title-large" text="Welcome">
+               <font>
+                  <Font size="22.0" />
+               </font></Label>
+                <Label styleClass="subtitle" text="Login to your account" />
+            </VBox>
+
+            <VBox alignment="CENTER" maxWidth="400" spacing="15" styleClass="login-card">
+                <VBox spacing="5">
+                    <TextField fx:id="emailField" prefWidth="250" promptText="Email" styleClass="text-field" />
+                </VBox>
+
+                <VBox spacing="5">
+                    <PasswordField fx:id="passwordField" prefWidth="250" promptText="Password" styleClass="password-field" />
+                </VBox>
+
+                <Label fx:id="errorLabel" style="-fx-text-fill: -error-red;" />
+
+                <Button onAction="#handleLogin" prefWidth="250" styleClass="btn-primary" text="Login" />
+
+                <HBox alignment="CENTER" spacing="5">
+                    <Label text="Don't have an account?" />
+                    <Button onAction="#handleRegister" style="-fx-background-color: transparent; -fx-text-fill: -accent-color; -fx-font-weight: bold; -fx-underline: true;" text="Register" />
+                </HBox>
+            </VBox>
+        </VBox>
+    </items>
+</SplitPane>

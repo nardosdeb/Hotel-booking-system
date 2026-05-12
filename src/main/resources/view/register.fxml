@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.RegisterController">
+    <!-- Stylesheet will be loaded programmatically in Main.java or LoginController.java -->
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: #f5f5f5;">
+            <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #f5f5f5; -fx-padding: 20;">
+                <VBox alignment="CENTER" spacing="5">
+                    <Label text="Create Account" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+                </VBox>
+
+                <VBox spacing="8" alignment="CENTER" style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 10;">
+                    <HBox spacing="10">
+                        <VBox spacing="3">
+                            <Label text="First Name" style="-fx-font-weight: bold;" />
+                            <TextField fx:id="firstNameField" promptText="Enter your first name"
+                                       style="-fx-pref-width: 145px; -fx-padding: 6;" />
+                            <Label fx:id="firstNameValidationLabel" />
+                        </VBox>
+                        <VBox spacing="3">
+                            <Label text="Last Name" style="-fx-font-weight: bold;" />
+                            <TextField fx:id="lastNameField" promptText="Enter your last name"
+                                       style="-fx-pref-width: 145px; -fx-padding: 6;" />
+                            <Label fx:id="lastNameValidationLabel" />
+                        </VBox>
+                    </HBox>
+
+                    <VBox spacing="3">
+                        <Label text="Email" style="-fx-font-weight: bold;" />
+                        <TextField fx:id="emailField" promptText="Enter your email"
+                                   style="-fx-pref-width: 300px; -fx-padding: 6;" />
+                        <Label fx:id="emailValidationLabel" />
+                    </VBox>
+
+                    <VBox spacing="3">
+                        <Label text="Address" style="-fx-font-weight: bold;" />
+                        <TextField fx:id="addressField" promptText="Enter your address"
+                                   style="-fx-pref-width: 300px; -fx-padding: 6;" />
+                        <Label fx:id="addressValidationLabel" />
+                    </VBox>
+
+                    <VBox spacing="3">
+                        <Label text="Nationality" style="-fx-font-weight: bold;" />
+                        <TextField fx:id="nationalityField" promptText="Enter your nationality"
+                                   style="-fx-pref-width: 300px; -fx-padding: 6;" />
+                        <Label fx:id="nationalityValidationLabel" />
+                    </VBox>
+
+                    <VBox spacing="3">
+                        <Label text="Phone Number" style="-fx-font-weight: bold;" />
+                        <TextField fx:id="phoneNumberField" promptText="Enter your phone number"
+                                   style="-fx-pref-width: 300px; -fx-padding: 6;" />
+                        <Label fx:id="phoneValidationLabel" />
+                    </VBox>
+
+                    <VBox spacing="3">
+                        <Label text="Password" style="-fx-font-weight: bold;" />
+                        <PasswordField fx:id="passwordField" promptText="Enter password (6-12 characters)"
+                                       style="-fx-pref-width: 300px; -fx-padding: 6;" />
+                        <Label fx:id="passwordValidationLabel" />
+                    </VBox>
+
+                    <VBox spacing="3">
+                        <Label text="Confirm Password" style="-fx-font-weight: bold;" />
+                        <PasswordField fx:id="confirmPasswordField" promptText="Confirm your password"
+                                       style="-fx-pref-width: 300px; -fx-padding: 6;" />
+                        <Label fx:id="confirmPasswordValidationLabel" />
+                    </VBox>
+
+                    <Label fx:id="errorLabel" style="-fx-text-fill: #e74c3c;" />
+                    <Label fx:id="successLabel" style="-fx-text-fill: #27ae60;" />
+
+                    <Button text="Register" onAction="#handleRegister"
+                            style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 30; -fx-pref-width: 300px;" />
+
+                    <HBox alignment="CENTER" spacing="5">
+                        <Label text="Already have an account?" />
+                        <Button text="Back to Login" onAction="#handleBackToLogin"
+                                style="-fx-background-color: transparent; -fx-text-fill: #3498db; -fx-underline: true;" />
+                    </HBox>
+                </VBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

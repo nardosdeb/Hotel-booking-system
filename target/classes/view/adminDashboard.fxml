@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane styleClass="dashboard-background" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AdminDashboardController">
+    <!-- Stylesheet will be loaded programmatically in Main.java or LoginController.java -->
+    <top>
+        <VBox>
+            <!-- Navigation Bar -->
+            <HBox alignment="CENTER_LEFT" spacing="15" styleClass="header">
+                <padding>
+                    <Insets bottom="15" left="30" right="30" top="15" />
+                </padding>
+
+                <ImageView fx:id="logoImageView" fitHeight="40" fitWidth="40" preserveRatio="true" />
+                <VBox spacing="2">
+                    <Label styleClass="header-title" text="Admin Dashboard" />
+                    <Label styleClass="header-subtitle" text="Hilton Hotel" />
+                </VBox>
+
+                <Region HBox.hgrow="ALWAYS" />
+
+                <Label fx:id="notificationIcon" style="-fx-font-size: 20px; -fx-text-fill: -accent-color;" text="🔔" visible="true" />
+                <Button onAction="#handleRefresh" styleClass="btn-primary" text="⟳" />
+
+                <Button onAction="#handleReport" styleClass="btn-primary" text="Report" />
+                <Button onAction="#handleAddAdmin" styleClass="btn-primary" text="Add Admin" />
+                <Button onAction="#handleLogout" styleClass="btn-logout" text="Logout" />
+            </HBox>
+
+            <!-- Stats Section -->
+            <VBox alignment="CENTER" spacing="15" styleClass="hero-section">
+                <padding>
+                    <Insets bottom="20" left="30" right="30" top="20" />
+                </padding>
+                <HBox alignment="CENTER" spacing="20">
+                    <Label fx:id="statsLabel" styleClass="hero-subtitle" />
+                    <Label styleClass="hero-subtitle" text="|" />
+                    <Label fx:id="totalTaxLabel" styleClass="hero-subtitle" />
+                    <Label styleClass="hero-subtitle" text="|" />
+                    <Label fx:id="totalRoomsLabel" styleClass="hero-subtitle" />
+                    <Label styleClass="hero-subtitle" text="|" />
+                    <Label fx:id="availableRoomsLabel" styleClass="hero-subtitle" />
+                    <Label styleClass="hero-subtitle" text="|" />
+                    <Label fx:id="bookedRoomsLabel" styleClass="hero-subtitle" />
+                </HBox>
+                <Label style="-fx-text-fill: -accent-light; -fx-font-size: 12px;" text="Note: Data updates require clicking the 'Refresh' button." />
+            </VBox>
+        </VBox>
+    </top>
+
+    <center>
+        <TabPane fx:id="tabPane">
+            <Tab closable="false" text="Rooms &amp; Payments">
+                <HBox spacing="20" style="-fx-padding: 20;">
+                    <!-- Left Side: Add/Edit Form -->
+                    <ScrollPane fitToWidth="true" minWidth="350" prefWidth="350" styleClass="content-scroll">
+                        <VBox spacing="15" style="-fx-background-color: -white; -fx-padding: 20; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 10, 0, 0, 3);">
+                            <Label style="-fx-font-size: 16px;" styleClass="section-title" text="Add/Edit Room" />
+
+                            <GridPane hgap="10" vgap="15">
+                                <Label text="Room Number:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                <TextField fx:id="roomNumberField" prefWidth="180" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                                <Label text="Room Type:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                <ComboBox fx:id="roomTypeCombo" prefWidth="180" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <String fx:value="Standard" />
+                                            <String fx:value="Deluxe" />
+                                            <String fx:value="Twin" />
+                                            <String fx:value="Single" />
+                                            <String fx:value="Family" />
+                                            <String fx:value="VIP Room" />
+                                            <String fx:value="Suite" />
+                                        </FXCollections>
+                                    </items>
+                                </ComboBox>
+
+                                <Label text="Price per Night:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                                <TextField fx:id="priceField" prefWidth="180" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                                <Label text="Capacity:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                                <ComboBox fx:id="capacityCombo" prefWidth="180" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <String fx:value="1" />
+                                            <String fx:value="2" />
+                                            <String fx:value="3" />
+                                            <String fx:value="4" />
+                                            <String fx:value="5" />
+                                        </FXCollections>
+                                    </items>
+                                </ComboBox>
+
+                                <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                                <ComboBox fx:id="statusCombo" prefWidth="180" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                                <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                                <TextArea fx:id="descriptionField" prefHeight="80" prefWidth="180" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+                                <Label text="Amenities:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                                <TextArea fx:id="amenitiesField" prefHeight="80" prefWidth="180" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <columnConstraints>
+                           <ColumnConstraints />
+                           <ColumnConstraints />
+                        </columnConstraints>
+                        <rowConstraints>
+                           <RowConstraints />
+                           <RowConstraints />
+                           <RowConstraints />
+                           <RowConstraints />
+                           <RowConstraints />
+                           <RowConstraints />
+                           <RowConstraints />
+                        </rowConstraints>
+                            </GridPane>
+
+                            <HBox spacing="10">
+                                <Button onAction="#handleAddRoom" styleClass="btn-primary" text="➕" />
+                                <Button onAction="#handleUpdateRoom" styleClass="btn-primary" text="♻" />
+                            </HBox>
+                            <HBox spacing="10">
+                                <Button onAction="#handleDeleteRoom" styleClass="btn-danger" text="🗑" />
+                                <Button onAction="#handleRoomSelection" prefHeight="40.0" prefWidth="33.0" style="-fx-background-color: -secondary-text-color; -fx-text-fill: -white;" text="⊘">
+                           <font>
+                              <Font size="13.0" />
+                           </font></Button>
+                            </HBox>
+                        </VBox>
+                    </ScrollPane>
+
+                    <!-- Middle: Rooms Table -->
+                    <VBox spacing="10" HBox.hgrow="ALWAYS">
+                        <Label style="-fx-font-size: 16px;" styleClass="section-title" text="All Rooms" />
+                        <TableView fx:id="roomsTable" onMouseClicked="#handleRoomSelection" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="roomNumberCol" prefWidth="100" text="Room No" />
+                                <TableColumn fx:id="roomTypeCol" prefWidth="150" text="Type" />
+                                <TableColumn fx:id="priceCol" prefWidth="100" text="Price" />
+                                <TableColumn fx:id="capacityCol" prefWidth="100" text="Capacity" />
+                                <TableColumn fx:id="statusCol" prefWidth="120" text="Status" />
+                            </columns>
+                        </TableView>
+                    </VBox>
+
+                    <!-- Right Side: Payment Methods -->
+                    <VBox minWidth="300" spacing="10" style="-fx-background-color: -white; -fx-padding: 20; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 10, 0, 0, 3);">
+                        <Label style="-fx-font-size: 16px;" styleClass="section-title" text="Payment Methods" />
+                        <TableView fx:id="paymentMethodsTable" prefHeight="200">
+                            <columns>
+                                <TableColumn fx:id="methodNameCol" prefWidth="120" text="Method" />
+                                <TableColumn fx:id="accountDetailsCol" prefWidth="150" text="Details" />
+                            </columns>
+                        </TableView>
+                        <HBox spacing="10">
+                            <Button onAction="#handleAddPaymentMethod" styleClass="btn-primary" text="➕" />
+                            <Button onAction="#handleUpdatePaymentMethod" styleClass="btn-primary" text="♻" />
+                            <Button onAction="#handleDeletePaymentMethod" styleClass="btn-danger" text="🗑" />
+                        </HBox>
+                    </VBox>
+                </HBox>
+            </Tab>
+
+            <Tab closable="false" text="All Bookings">
+                <VBox spacing="20" style="-fx-padding: 20;">
+                    <Label style="-fx-font-size: 16px;" styleClass="section-title" text="All Bookings" />
+                    <TableView fx:id="bookingsTable" prefHeight="400">
+                        <columns>
+                            <TableColumn fx:id="bookingIdCol" text="Booking ID" />
+                            <TableColumn fx:id="customerCol" text="Customer" />
+                            <TableColumn fx:id="bookingRoomCol" text="Room" />
+                            <TableColumn fx:id="checkInCol" text="Check-in" />
+                            <TableColumn fx:id="checkOutCol" text="Check-out" />
+                            <TableColumn fx:id="totalPriceCol" text="Total Price" />
+                            <TableColumn fx:id="bookingStatusCol" text="Status" />
+                        </columns>
+                    </TableView>
+                    <HBox spacing="10">
+                        <Button onAction="#handleConfirmPayment" styleClass="btn-primary" text="✅" />
+                        <Button onAction="#handleCancelBooking" styleClass="btn-danger" text="❌" />
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <Tab closable="false" text="Pending Bookings">
+                <VBox spacing="20" style="-fx-padding: 20;">
+                    <Label style="-fx-font-size: 16px;" styleClass="section-title" text="Pending Bookings" />
+                    <TableView fx:id="pendingBookingsTable" prefHeight="400">
+                        <columns>
+                            <TableColumn fx:id="pendingBookingIdCol" text="Booking ID" />
+                            <TableColumn fx:id="pendingCustomerCol" text="Customer" />
+                            <TableColumn fx:id="pendingRoomCol" text="Room" />
+                            <TableColumn fx:id="pendingCheckInCol" text="Check-in" />
+                            <TableColumn fx:id="pendingCheckOutCol" text="Check-out" />
+                            <TableColumn fx:id="pendingTotalPriceCol" text="Total Price" />
+                            <TableColumn fx:id="pendingStatusCol" text="Status" />
+                        </columns>
+                    </TableView>
+                    <HBox spacing="10">
+                        <Button onAction="#handleConfirmPayment" styleClass="btn-primary" text="✅" />
+                        <Button onAction="#handleCancelBooking" styleClass="btn-danger" text="❌" />
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <Tab closable="false" text="Confirmed Bookings">
+                <VBox spacing="20" style="-fx-padding: 20;">
+                    <Label style="-fx-font-size: 16px;" styleClass="section-title" text="Confirmed Bookings" />
+                    <TableView fx:id="confirmedBookingsTable" prefHeight="400">
+                        <columns>
+                            <TableColumn fx:id="confirmedBookingIdCol" text="Booking ID" />
+                            <TableColumn fx:id="confirmedCustomerCol" text="Customer" />
+                            <TableColumn fx:id="confirmedRoomCol" text="Room" />
+                            <TableColumn fx:id="confirmedCheckInCol" text="Check-in" />
+                            <TableColumn fx:id="confirmedCheckOutCol" text="Check-out" />
+                            <TableColumn fx:id="confirmedTotalPriceCol" text="Total Price" />
+                            <TableColumn fx:id="confirmedStatusCol" text="Status" />
+                        </columns>
+                    </TableView>
+                    <HBox spacing="10">
+                        <Button onAction="#handleCancelBooking" styleClass="btn-danger" text="❌" />
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <Tab closable="false" text="Cancelled Bookings">
+                <VBox spacing="20" style="-fx-padding: 20;">
+                    <Label style="-fx-font-size: 16px;" styleClass="section-title" text="Cancelled Bookings" />
+                    <TableView fx:id="cancelledBookingsTable" prefHeight="400">
+                        <columns>
+                            <TableColumn fx:id="cancelledBookingIdCol" text="Booking ID" />
+                            <TableColumn fx:id="cancelledCustomerCol" text="Customer" />
+                            <TableColumn fx:id="cancelledRoomCol" text="Room" />
+                            <TableColumn fx:id="cancelledCheckInCol" text="Check-in" />
+                            <TableColumn fx:id="cancelledCheckOutCol" text="Check-out" />
+                            <TableColumn fx:id="cancelledTotalPriceCol" text="Total Price" />
+                            <TableColumn fx:id="cancelledStatusCol" text="Status" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <Tab closable="false" text="Users Management">
+                <VBox spacing="20" style="-fx-padding: 20;">
+                    <Label style="-fx-font-size: 16px;" styleClass="section-title" text="Registered Users" />
+                    <TableView fx:id="usersTable" prefHeight="400">
+                        <columns>
+                            <TableColumn fx:id="userIdCol" prefWidth="60" text="User ID" />
+                            <TableColumn fx:id="userFirstNameCol" prefWidth="100" text="First Name" />
+                            <TableColumn fx:id="userLastNameCol" prefWidth="100" text="Last Name" />
+                            <TableColumn fx:id="userEmailCol" prefWidth="150" text="Email" />
+                            <TableColumn fx:id="userAddressCol" prefWidth="100" text="Address" />
+                            <TableColumn fx:id="userNationalityCol" prefWidth="100" text="Nationality" />
+                            <TableColumn fx:id="userPhoneCol" prefWidth="100" text="Phone" />
+                            <TableColumn fx:id="userRoleCol" prefWidth="80" text="Role" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <Tab closable="false" text="User Booking History">
+                <VBox spacing="20" style="-fx-padding: 20;">
+                    <Label fx:id="selectedUserBookingHistoryLabel" style="-fx-font-size: 16px;" styleClass="section-title" text="Select a user to view their booking history" />
+                    <TableView fx:id="userBookingHistoryTable" prefHeight="400">
+                        <columns>
+                            <TableColumn fx:id="userBookingIdCol" text="Booking ID" />
+                            <TableColumn fx:id="userBookedRoomCol" text="Room" />
+                            <TableColumn fx:id="userCheckInCol" text="Check-in" />
+                            <TableColumn fx:id="userCheckOutCol" text="Check-out" />
+                            <TableColumn fx:id="userTotalPriceCol" text="Total Price" />
+                            <TableColumn fx:id="userBookingStatusCol" text="Status" />
+                            <TableColumn fx:id="userPaymentMethodCol" text="Payment Method" />
+                            <TableColumn fx:id="userPaymentDetailsCol" text="Payment Details" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>
